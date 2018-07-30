@@ -10,6 +10,7 @@
     <tr>
         <th>编号</th>
         <th>姓名</th>
+        <th>角色</th>
         <th>信息</th>
     </tr>
     <tr>
@@ -19,10 +20,11 @@
 </table>
 <script>
     const tpl = function (user) {
-        const {id, name, desc} = user;
+        const {id, name, desc, role} = user;
         return `  <tr>
         <td>${id}</td>
         <td>${name}</td>
+        <td>${role}</td>
         <td>${desc}</td>
         <td><a href="/update.html?id=${id}&desc=${desc}&name=${name}">修改</a></td>
     </tr>`
@@ -32,7 +34,7 @@
         const list = data.payload;
         console.log(list[0]);
         list.forEach(v => {
-            tb.innerHTML += tpl(v)
+            tb.innerHTML += tpl({...v, role: v.role.name})
         })
     }))</script>
 </body>
