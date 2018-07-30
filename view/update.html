@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="form" action="/api/update" method="post">
+    <input type="text" disabled name="name">
+    <input type="hidden" name="id">
+    <input type="text" value="" name="desc">
+
+    <input type="submit">
+</form>
+<script>function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+}
+
+var id = getQueryString('id'),
+    desc = getQueryString('desc'),
+    name = getQueryString('name')
+form.id.value = id;
+form.desc.value = desc;
+form.name.value = name;
+</script>
+</body>
+</html>

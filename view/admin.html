@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tbody id="tb">
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>信息</th>
+    </tr>
+    <tr>
+
+    </tr>
+    </tbody>
+</table>
+<script>
+    const tpl = function (user) {
+        const {id, name, desc} = user;
+        return `  <tr>
+        <td>${id}</td>
+        <td>${name}</td>
+        <td>${desc}</td>
+        <td><a href="/update.html?id=${id}&desc=${desc}&name=${name}">修改</a></td>
+    </tr>`
+    }
+    fetch('/api/users').then(res => res.json().then(function (data) {
+
+        const list = data.payload;
+        console.log(list[0]);
+        list.forEach(v => {
+            tb.innerHTML += tpl(v)
+        })
+    }))</script>
+</body>
+</html>
