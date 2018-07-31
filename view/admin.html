@@ -4,20 +4,38 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
-<table>
+<table border="1">
+    <caption align="center">用户信息</caption>
     <tbody id="tb">
     <tr>
         <th>编号</th>
         <th>姓名</th>
         <th>角色</th>
         <th>信息</th>
-    </tr>
-    <tr>
-
+        <th>操作</th>
     </tr>
     </tbody>
 </table>
+<hr>
+<table border="1">
+    <caption align="center">课程信息</caption>
+    <tbody id="t2">
+    <tr>
+        <th>编号</th>
+        <th>名称</th>
+        <th>详细信息</th>
+    </tr>
+    </tbody>
+</table>
+
+<hr>
+<h3>添加课程信息</h3>
+<form action="/api/addCourse" method="post">
+    <input type="text" name='name' placeholder="课程名称">
+    <input type="submit">
+</form>
 <script>
     const tpl = function (user) {
         const {id, name, desc, role} = user;
@@ -29,6 +47,14 @@
         <td><a href="/update.html?id=${id}&desc=${desc}&name=${name}">修改</a></td>
     </tr>`
     }
+    const tpl2 = function (course) {
+        const {id, name} = course;
+        return ` <tr>
+                    <td>${id}</td>
+                    <td>${name}</td>
+                   </tr>
+        `
+    }
     fetch('/api/users').then(res => res.json().then(function (data) {
 
         const list = data.payload;
@@ -36,6 +62,10 @@
         list.forEach(v => {
             tb.innerHTML += tpl({...v, role: v.role.name})
         })
-    }))</script>
+    }))
+    fetch('/api/course').then(res => res.json().then(function (data) {
+        console.log(data);
+    }))
+</script>
 </body>
 </html>

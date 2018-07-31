@@ -16,8 +16,23 @@ Router.post('/update', function (req, res) {
         modles.user.get(id, function (err, doc) {
             doc.desc = desc;
             doc.save(function () {
-                res.redirect('/'+doc.role.name+'.html')
+                res.redirect('/' + doc.role.name + '.html')
             });
+        })
+    })
+})
+Router.get('/course', function (req, res) {
+    orm.then(models => {
+        models.course.find({}, function (err, doc) {
+            res.json({data: doc})
+        })
+    })
+})
+Router.post('/addCourse', function (req, res) {
+    const {name} = req.body;
+    orm.then(function (modles) {
+        modles.course.create({name}, function () {
+            res.end();
         })
     })
 })
